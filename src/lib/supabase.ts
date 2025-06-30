@@ -10,43 +10,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 // Initialize supabase client only if env vars are available.
 // This allows the app to run without Supabase for features that don't require it.
-export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
+export const supabase = supabaseUrl && supabaseAnonKey ? createClient<Database>(supabaseUrl, supabaseAnonKey) : null
 
 // Database types
-// Ensure this interface is still relevant or remove if Supabase is completely unused.
 export interface Database {
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          id: string
-          email: string
-          full_name: string | null
-          avatar_url: string | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id: string
-          email: string
-          full_name?: string | null
-          avatar_url?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          email?: string
-          full_name?: string | null
-          avatar_url?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-      }
+      // profiles table removed
       chats: {
         Row: {
           id: string
-          user_id: string
+          // user_id: string // Removed
           title: string
           created_at: string
           updated_at: string
@@ -54,7 +28,7 @@ export interface Database {
         }
         Insert: {
           id?: string
-          user_id: string
+          // user_id: string // Removed
           title: string
           created_at?: string
           updated_at?: string
@@ -62,7 +36,7 @@ export interface Database {
         }
         Update: {
           id?: string
-          user_id?: string
+          // user_id?: string // Removed
           title?: string
           created_at?: string
           updated_at?: string
@@ -106,7 +80,7 @@ export interface Database {
           source: string
           chapter: string | null
           section: string | null
-          embedding: number[] | null
+          embedding: number[] | null // Assuming embedding is a numeric array
           created_at: string
           updated_at: string
         }
@@ -136,7 +110,7 @@ export interface Database {
       medical_tools_usage: {
         Row: {
           id: string
-          user_id: string
+          // user_id: string // Removed
           tool_name: string
           input_data: Record<string, any>
           output_data: Record<string, any>
@@ -144,7 +118,7 @@ export interface Database {
         }
         Insert: {
           id?: string
-          user_id: string
+          // user_id: string // Removed
           tool_name: string
           input_data: Record<string, any>
           output_data: Record<string, any>
@@ -152,7 +126,7 @@ export interface Database {
         }
         Update: {
           id?: string
-          user_id?: string
+          // user_id?: string // Removed
           tool_name?: string
           input_data?: Record<string, any>
           output_data?: Record<string, any>
@@ -166,7 +140,7 @@ export interface Database {
     Functions: {
       match_knowledge_base: {
         Args: {
-          query_embedding: number[]
+          query_embedding: number[] // Assuming embedding is a numeric array
           match_threshold: number
           match_count: number
         }
