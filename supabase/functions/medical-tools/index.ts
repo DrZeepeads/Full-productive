@@ -170,18 +170,18 @@ serve(async (req) => {
     )
 
     // Get user from auth header
-    const authHeader = req.headers.get('Authorization')
-    if (!authHeader) {
-      throw new Error('No authorization header')
-    }
+    // const authHeader = req.headers.get('Authorization')
+    // if (!authHeader) {
+    //   throw new Error('No authorization header')
+    // }
 
-    const { data: { user }, error: authError } = await supabaseClient.auth.getUser(
-      authHeader.replace('Bearer ', '')
-    )
+    // const { data: { user }, error: authError } = await supabaseClient.auth.getUser(
+    //   authHeader.replace('Bearer ', '')
+    // )
 
-    if (authError || !user) {
-      throw new Error('Invalid authentication')
-    }
+    // if (authError || !user) {
+    //   throw new Error('Invalid authentication')
+    // }
 
     let result: any = {}
 
@@ -319,7 +319,7 @@ serve(async (req) => {
     await supabaseClient
       .from('medical_tools_usage')
       .insert({
-        user_id: user.id,
+        // user_id: user.id, // Removed user_id
         tool_name: requestData.tool,
         input_data: requestData,
         output_data: result
