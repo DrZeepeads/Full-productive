@@ -6,7 +6,7 @@ import { ChatInterface } from './ChatInterface'
 import { LibraryView } from './LibraryView'
 import { ExploreView } from './ExploreView'
 import { SettingsView } from './SettingsView'
-import { MedicalToolsView } from './MedicalToolsView'
+import MedicalToolsView from './MedicalToolsView' // Changed to default import
 
 export function Layout() {
   const { currentView, sidebarOpen } = useAppStore()
