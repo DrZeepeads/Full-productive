@@ -424,4 +424,95 @@ export const PEDIATRIC_DRUG_DATABASE: MedicalSystem[] = [
 
 ]
 
+export const searchDrugsBySystem = (systemId: string): DrugInfo[] => {
+  const system = PEDIATRIC_DRUG_DATABASE.find(s => s.id.toLowerCase() === systemId.toLowerCase())
+  return system ? system.drugs : []
+}
 
+export const searchDrugsByIndication = (searchTerm: string): DrugInfo[] => {
+  if (!searchTerm.trim()) return []
+  const lowerSearchTerm = searchTerm.toLowerCase()
+  const allDrugs: DrugInfo[] = PEDIATRIC_DRUG_DATABASE.flatMap(system => system.drugs)
+
+  return allDrugs.filter(drug =>
+    drug.indications.some(indication => indication.toLowerCase().includes(lowerSearchTerm)) ||
+    drug.name.toLowerCase().includes(lowerSearchTerm) ||
+    drug.genericName.toLowerCase().includes(lowerSearchTerm)
+  )
+}
+
+export const calculateDrugDose = (
+  drugNameOrGeneric: string,
+  weightKg: number,
+  ageYears: number,
+  indication: string = 'general', // Default indication
+  route: string = 'PO' // Default route
+): any => { // Return type 'any' for now, can be refined to DrugCalculationResult
+  const lowerDrugName = drugNameOrGeneric.toLowerCase()
+  let foundDrug: DrugInfo | undefined
+  let foundSystem: MedicalSystem | undefined
+
+  for (const system of PEDIATRIC_DRUG_DATABASE) {
+    const drug = system.drugs.find(d =>
+      d.name.toLowerCase() === lowerDrugName ||
+      d.genericName.toLowerCase() === lowerDrugName
+    )
+    if (drug) {
+      foundDrug = drug
+      foundSystem = system
+      break
+    }
+  }
+
+  if (!foundDrug || !foundSystem) {
+    throw new Error(`Drug "${drugNameOrGeneric}" not found in the database.`)
+  }
+
+  // Attempt to find a dosing regimen that matches the route.
+  // This is a simplified selection logic. Real-world scenarios might need more complex matching
+  // based on indication, age, specific formulation, etc.
+  const dosingInfo = foundDrug.dosing.find(d => d.route.toUpperCase().startsWith(route.toUpperCase()))
+
+  if (!dosingInfo) {
+    // Fallback to the first available dosing if specific route not found
+    const fallbackDosing = foundDrug.dosing[0]
+    if (!fallbackDosing) {
+      throw new Error(`No dosing information available for "${foundDrug.name}" for route "${route}".`)
+    }
+    // Consider logging a warning if a fallback is used, or handle more gracefully.
+    // For now, we'll use the first available dosing.
+    // This part of the logic might need refinement based on clinical requirements.
+    // For example, some drugs might not be substitutable by route.
+    // console.warn(`Dosing for route "${route}" not found for ${foundDrug.name}. Using first available: ${fallbackDosing.route}`);
+    // dosingInfo = fallbackDosing;
+    // Temporarily throwing error if exact route match isn't found, can be adjusted
+     throw new Error(`Specific dosing for route "${route}" not found for ${foundDrug.name}. Available routes: ${foundDrug.dosing.map(d=>d.route).join(', ')}.`);
+  }
+
+  // Placeholder for actual dose calculation logic.
+  // This would involve parsing the 'dose' string (e.g., "1-2 mg/kg/dose")
+  // and applying it to the weight. This is highly complex due to varied formats.
+  // For this example, we'll return the dosing string directly.
+  // A real implementation would need a robust parsing and calculation engine.
+
+  return {
+    drug: foundDrug.name,
+    genericName: foundDrug.genericName,
+    system: foundSystem.name,
+    indication: indication, // Use the provided indication
+    dosing: { // Return the matched dosing object
+      route: dosingInfo.route,
+      dose: dosingInfo.dose, // This is the string, not a calculated value yet
+      frequency: dosingInfo.frequency,
+      maxDose: dosingInfo.maxDose,
+      duration: dosingInfo.duration,
+    },
+    contraindications: foundDrug.contraindications,
+    warnings: foundDrug.warnings,
+    monitoring: foundDrug.monitoring,
+    sideEffects: foundDrug.sideEffects,
+    ageRestrictions: foundDrug.ageRestrictions,
+    renalAdjustment: foundDrug.renalAdjustment,
+    hepaticAdjustment: foundDrug.hepaticAdjustment,
+  }
+}

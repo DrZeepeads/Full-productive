@@ -13,7 +13,7 @@ import {
   calculateDrugDose, 
   searchDrugsBySystem, 
   searchDrugsByIndication,
-  getAllSystems,
+  // getAllSystems, // Removed this import
   type DrugInfo,
   type MedicalSystem
 } from '../lib/pediatric-drugs'
@@ -75,7 +75,7 @@ export default function MedicalToolsView() {
   const [filteredDrugs, setFilteredDrugs] = useState<DrugInfo[]>([])
   const [selectedDrugInfo, setSelectedDrugInfo] = useState<DrugInfo | null>(null)
   
-  const systems = getAllSystems()
+  const systems = PEDIATRIC_DRUG_DATABASE // Changed to use PEDIATRIC_DRUG_DATABASE directly
   
   useEffect(() => {
     if (drugData.selectedSystem) {
