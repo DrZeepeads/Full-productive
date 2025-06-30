@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 import { Label } from './ui/label'
-import { Textarea } from './ui/textarea'
+// import { Textarea } from './ui/textarea' // Unused Textarea
 import { Badge } from './ui/badge'
 import { Separator } from './ui/separator'
-import { Calculator, Heart, Stethoscope, Pill, AlertTriangle, Info, Search } from 'lucide-react'
+import { Calculator, Stethoscope, Pill, AlertTriangle, Info, Search } from 'lucide-react' // Removed Heart
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
 import { 
@@ -60,16 +60,16 @@ export default function MedicalToolsView() {
     route: 'PO'
   })
   
-  const [bmiData, setBmiData] = useState({
-    age: '',
-    weight: '',
-    height: '',
-    gender: ''
-  })
+  // const [bmiData, setBmiData] = useState({ // Removed bmiData
+  //   age: '',
+  //   weight: '',
+  //   height: '',
+  //   gender: ''
+  // })
   
   const [growthResults, setGrowthResults] = useState<GrowthResult | null>(null)
   const [drugResults, setDrugResults] = useState<DrugCalculationResult | null>(null)
-  const [bmiResults, setBmiResults] = useState<any>(null)
+  // const [bmiResults, setBmiResults] = useState<any>(null) // Already removed bmiResults
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredDrugs, setFilteredDrugs] = useState<DrugInfo[]>([])
@@ -155,34 +155,35 @@ export default function MedicalToolsView() {
     }
   }
 
-  const calculateBMI = async () => {
-    if (!bmiData.age || !bmiData.weight || !bmiData.height || !bmiData.gender) {
-      toast.error('Please enter all BMI calculation fields')
-      return
-    }
+  // Removed calculateBMI function
+  // const calculateBMI = async () => {
+  //   if (!bmiData.age || !bmiData.weight || !bmiData.height || !bmiData.gender) {
+  //     toast.error('Please enter all BMI calculation fields')
+  //     return
+  //   }
 
-    setLoading(true)
-    try {
-      const { data, error } = await supabase.functions.invoke('medical-tools', {
-        body: {
-          tool: 'bmi-calculator',
-          age: parseInt(bmiData.age),
-          weight: parseFloat(bmiData.weight),
-          height: parseFloat(bmiData.height),
-          gender: bmiData.gender
-        }
-      })
+  //   setLoading(true)
+  //   try {
+  //     const { data, error } = await supabase.functions.invoke('medical-tools', {
+  //       body: {
+  //         tool: 'bmi-calculator',
+  //         age: parseInt(bmiData.age),
+  //         weight: parseFloat(bmiData.weight),
+  //         height: parseFloat(bmiData.height),
+  //         gender: bmiData.gender
+  //       }
+  //     })
 
-      if (error) throw error
-      setBmiResults(data)
-      toast.success('BMI calculated successfully')
-    } catch (error) {
-      console.error('Error calculating BMI:', error)
-      toast.error('Failed to calculate BMI')
-    } finally {
-      setLoading(false)
-    }
-  }
+  //     if (error) throw error
+  //     setBmiResults(data)
+  //     toast.success('BMI calculated successfully')
+  //   } catch (error) {
+  //     console.error('Error calculating BMI:', error)
+  //     toast.error('Failed to calculate BMI')
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -206,19 +207,19 @@ export default function MedicalToolsView() {
       </p>
 
       <Tabs defaultValue="drug-calculator" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4 bg-[#2A2A2A]">
+        <TabsList className="grid w-full grid-cols-2 bg-[#2A2A2A]"> {/* Updated grid-cols-2 */}
           <TabsTrigger value="drug-calculator" className="data-[state=active]:bg-[#1E1E1E]">
             Drug Calculator
           </TabsTrigger>
           <TabsTrigger value="growth-charts" className="data-[state=active]:bg-[#1E1E1E]">
             Growth Charts
           </TabsTrigger>
-          <TabsTrigger value="bmi-calculator" className="data-[state=active]:bg-[#1E1E1E]">
+          {/* <TabsTrigger value="bmi-calculator" className="data-[state=active]:bg-[#1E1E1E]">
             BMI Calculator
           </TabsTrigger>
           <TabsTrigger value="immunizations" className="data-[state=active]:bg-[#1E1E1E]">
             Immunizations
-          </TabsTrigger>
+          </TabsTrigger> */}
         </TabsList>
 
         <TabsContent value="drug-calculator">
@@ -594,7 +595,8 @@ export default function MedicalToolsView() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="bmi-calculator">
+        {/* Removed BMI Calculator Tab Content */}
+        {/* <TabsContent value="bmi-calculator">
           <Card className="bg-[#1E1E1E] border-[#333]">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-white">
@@ -698,9 +700,10 @@ export default function MedicalToolsView() {
               )}
             </CardContent>
           </Card>
-        </TabsContent>
+        </TabsContent> */}
 
-        <TabsContent value="immunizations">
+        {/* Removed Immunizations Tab Content */}
+        {/* <TabsContent value="immunizations">
           <Card className="bg-[#1E1E1E] border-[#333]">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-white">
@@ -745,7 +748,7 @@ export default function MedicalToolsView() {
               </div>
             </CardContent>
           </Card>
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
     </div>
   )

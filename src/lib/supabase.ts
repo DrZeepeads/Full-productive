@@ -4,18 +4,16 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+  // We will not throw an error here anymore, as supabase might not be used.
+  // console.warn('Missing Supabase environment variables. Features requiring Supabase may not work.')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true
-  }
-})
+// Initialize supabase client only if env vars are available.
+// This allows the app to run without Supabase for features that don't require it.
+export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
 
 // Database types
+// Ensure this interface is still relevant or remove if Supabase is completely unused.
 export interface Database {
   public: {
     Tables: {

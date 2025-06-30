@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { supabase } from './supabase'
-import type { User } from '@supabase/supabase-js'
+// import type { User } from '@supabase/supabase-js' // Removed User import
 
 export interface Message {
   id: string
@@ -29,10 +29,10 @@ export interface MedicalTool {
   category: 'calculator' | 'chart' | 'reference'
 }
 
-interface AppState {
+export interface AppState { // Added export
   // Authentication
-  user: User | null
-  isAuthenticated: boolean
+  // user: User | null // Removed user state
+  // isAuthenticated: boolean // Removed isAuthenticated state
   
   // Chat state
   chats: Chat[]
@@ -49,8 +49,8 @@ interface AppState {
   medicalTools: MedicalTool[]
   
   // Actions
-  setUser: (user: User | null) => void
-  setAuthenticated: (authenticated: boolean) => void
+  // setUser: (user: User | null) => void // Removed setUser action
+  // setAuthenticated: (authenticated: boolean) => void // Removed setAuthenticated action
   setSidebarOpen: (open: boolean) => void
   setCurrentView: (view: AppState['currentView']) => void
   setCurrentChat: (chatId: string | null) => void
@@ -70,8 +70,8 @@ export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       // Initial state
-      user: null,
-      isAuthenticated: false,
+      // user: null, // Removed initial user state
+      // isAuthenticated: false, // Removed initial isAuthenticated state
       chats: [],
       currentChatId: null,
       isLoading: false,
@@ -94,26 +94,26 @@ export const useAppStore = create<AppState>()(
           icon: 'Calculator',
           category: 'calculator'
         },
-        {
-          id: 'bmi-calculator',
-          name: 'BMI Calculator',
-          description: 'Calculate and interpret pediatric BMI',
-          icon: 'Activity',
-          category: 'calculator'
-        },
-        {
-          id: 'immunization-schedule',
-          name: 'Immunization Schedule',
-          description: 'View recommended vaccination schedules',
-          icon: 'Shield',
-          category: 'reference'
-        }
+        // { // Removed BMI Calculator from medical tools
+        //   id: 'bmi-calculator',
+        //   name: 'BMI Calculator',
+        //   description: 'Calculate and interpret pediatric BMI',
+        //   icon: 'Activity',
+        //   category: 'calculator'
+        // },
+        // { // Removed Immunization Schedule from medical tools
+        //   id: 'immunization-schedule',
+        //   name: 'Immunization Schedule',
+        //   description: 'View recommended vaccination schedules',
+        //   icon: 'Shield',
+        //   category: 'reference'
+        // }
       ],
 
       // Actions
-      setUser: (user) => set({ user, isAuthenticated: !!user }),
+      // setUser: (user) => set({ user, isAuthenticated: !!user }), // Removed setUser action
       
-      setAuthenticated: (authenticated) => set({ isAuthenticated: authenticated }),
+      // setAuthenticated: (authenticated) => set({ isAuthenticated: authenticated }), // Removed setAuthenticated action
       
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       
@@ -162,16 +162,24 @@ export const useAppStore = create<AppState>()(
       setStreaming: (streaming) => set({ isStreaming: streaming }),
       
       loadChats: async () => {
-        const { user } = get()
-        if (!user) return
+        // const { user } = get() // Removed user
+        // if (!user) return // Removed user check
+
+        if (!supabase) {
+          console.warn('Supabase not initialized, skipping loadChats.')
+          set({ chats: [], isLoading: false })
+          return
+        }
 
         try {
           set({ isLoading: true })
           
+          // TODO: Decide on how to handle chats without user_id or remove chat loading if not needed
+          // For now, let's assume chats are public or not tied to a specific user
           const { data: chatsData, error: chatsError } = await supabase
             .from('chats')
             .select('*')
-            .eq('user_id', user.id)
+            // .eq('user_id', user.id) // Removed user_id filter
             .order('updated_at', { ascending: false })
 
           if (chatsError) throw chatsError
@@ -215,14 +223,32 @@ export const useAppStore = create<AppState>()(
       },
       
       createNewChat: async (title = 'New Chat') => {
-        const { user } = get()
-        if (!user) throw new Error('User not authenticated')
+        // const { user } = get() // Removed user
+        // if (!user) throw new Error('User not authenticated') // Removed user check
+
+        if (!supabase) {
+          console.warn('Supabase not initialized, cannot create new chat.')
+          // Create a local-only chat if Supabase is not available
+          const newChatId = crypto.randomUUID()
+          const newChat: Chat = {
+            id: newChatId,
+            title,
+            messages: [],
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            isArchived: false,
+          }
+          get().addChat(newChat)
+          set({ currentChatId: newChat.id })
+          return newChat.id
+        }
 
         try {
+          // TODO: Decide on user_id for chats or make it nullable in the database
           const { data, error } = await supabase
             .from('chats')
             .insert({
-              user_id: user.id,
+              // user_id: user.id, // Removed user_id
               title,
               is_archived: false
             })
@@ -251,8 +277,29 @@ export const useAppStore = create<AppState>()(
       },
       
       sendMessage: async (content: string) => {
-        const { user, currentChatId } = get()
-        if (!user || !currentChatId) return
+        const { currentChatId } = get() // Removed user
+        if (!currentChatId) return // Removed user check
+
+        if (!supabase) {
+          console.warn('Supabase not initialized, cannot send message to backend.')
+          // Add message locally only
+          const userMessage: Message = {
+            id: crypto.randomUUID(),
+            role: 'user',
+            content,
+            timestamp: new Date()
+          }
+          get().addMessage(currentChatId, userMessage)
+          // Optionally, add a local AI response or a message indicating offline mode
+          const assistantMessage: Message = {
+            id: crypto.randomUUID(),
+            role: 'assistant',
+            content: "Offline mode: Cannot connect to AI services.",
+            timestamp: new Date()
+          }
+          get().addMessage(currentChatId, assistantMessage)
+          return
+        }
 
         try {
           // Add user message
@@ -281,11 +328,23 @@ export const useAppStore = create<AppState>()(
           // Call chat completion API
           set({ isStreaming: true })
           
+          // Ensure supabase and auth are available before trying to get a session
+          let accessToken = null
+          if (supabase && supabase.auth) {
+            const sessionResult = await supabase.auth.getSession()
+            accessToken = sessionResult.data.session?.access_token
+          }
+
+          // If no access token (e.g. auth removed or Supabase not fully configured),
+          // handle gracefully or skip API call that requires auth.
+          // For now, we'll proceed assuming the function might not require auth or will handle it.
+          // If it strictly requires auth, this call might fail.
+
           const response = await fetch(`${supabase.supabaseUrl}/functions/v1/chat-completion`, {
             method: 'POST',
             headers: {
-              'Authorization': `Bearer ${await supabase.auth.getSession().then(s => s.data.session?.access_token)}`,
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              ...(accessToken && { 'Authorization': `Bearer ${accessToken}` }) // Conditionally add Auth header
             },
             body: JSON.stringify({
               messages: messages.map(msg => ({

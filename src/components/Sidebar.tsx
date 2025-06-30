@@ -10,8 +10,7 @@ import {
   Settings, 
   Plus, 
   Stethoscope,
-  ChevronLeft,
-  ChevronRight,
+  // ChevronLeft, // Removed as the toggle button is now in Menubar
   MoreHorizontal,
   Trash2,
   Edit3,
@@ -36,8 +35,8 @@ export function Sidebar() {
     setCurrentChat,
     createNewChat,
     deleteChat,
-    updateChat,
-    user
+    updateChat
+    // user // Removed user from store destructuring
   } = useAppStore()
 
   const [editingChatId, setEditingChatId] = useState<string | null>(null)
@@ -100,38 +99,28 @@ export function Sidebar() {
     }
   ]
 
-  if (!sidebarOpen) {
-    return (
-      <div className="w-0 overflow-hidden">
-        <div className="h-full bg-sidebar border-r border-sidebar-border" />
-      </div>
-    )
-  }
+  // The parent component (Layout) now controls the visibility and width of the sidebar container.
+  // This component will always render its content as if it's visible.
+  // The toggle button for the sidebar is now in the Menubar for desktop.
+  // The concept of a "closed" sidebar rendering nothing, or a button to open it from here, is removed.
 
   return (
-    <div className="h-full bg-sidebar border-r border-sidebar-border flex flex-col">
-      {/* Header */}
+    <div className="h-full flex flex-col"> {/* Removed bg and border, handled by container in Layout */}
+      {/* Header - Simplified, as the main app header/logo is in Menubar */}
       <div className="p-4 border-b border-sidebar-border">
-        <div className="flex items-center justify-between mb-4">
+        {/* Title can remain or be removed if redundant with Menubar */}
+        {/* <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <Stethoscope className="w-6 h-6 text-sidebar-primary" />
             <span className="font-semibold text-sidebar-foreground">Nelson-GPT</span>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarOpen(false)}
-            className="text-sidebar-foreground hover:bg-sidebar-accent"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </Button>
-        </div>
+        </div> */}
 
         {/* New Chat Button */}
         <Button
           onClick={handleNewChat}
           className="w-full btn-medical flex items-center space-x-2"
-          disabled={!user}
+          // disabled={!user} // Removed disabled attribute
         >
           <Plus className="w-4 h-4" />
           <span>New Chat</span>
@@ -272,13 +261,13 @@ export function Sidebar() {
           Settings
         </Button>
         
-        {user && (
+        {/* {user && ( // Removed user email display
           <div className="mt-2 p-2 rounded-md bg-sidebar-accent">
             <p className="text-xs text-sidebar-foreground/70 truncate">
               {user.email}
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   )
