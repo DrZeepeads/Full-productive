@@ -1,0 +1,73 @@
+[
+  {
+    "title": "Fever in Infants and Children - Overview",
+    "content": "Fever is one of the most common presenting symptoms in pediatric practice. It is defined as a rectal temperature ≥38.0°C (100.4°F), oral temperature ≥37.8°C (100.0°F), or axillary temperature ≥37.2°C (99.0°F). Fever represents the body's normal physiologic response to infection and inflammation. In most cases, fever is beneficial and helps the immune system fight infection. However, fever can be concerning in certain populations, particularly infants under 3 months of age, immunocompromised children, and those with underlying chronic conditions. The approach to fever management should focus on identifying serious bacterial infections while avoiding unnecessary testing and treatment in well-appearing children with viral illnesses.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 201: Fever",
+    "section": "Definition and Pathophysiology"
+  },
+  {
+    "title": "Fever Management in Children",
+    "content": "The primary goal of fever management is patient comfort, not normalization of temperature. Antipyretic therapy should be used when the child appears uncomfortable, not solely based on the degree of temperature elevation. Acetaminophen (10-15 mg/kg/dose every 4-6 hours, maximum 75 mg/kg/day) and ibuprofen (5-10 mg/kg/dose every 6-8 hours, maximum 40 mg/kg/day) are the preferred antipyretic agents. Ibuprofen should not be used in infants under 6 months of age or in children with dehydration, kidney disease, or bleeding disorders. Alternating acetaminophen and ibuprofen is not routinely recommended. Aspirin should be avoided in children due to the risk of Reye syndrome. Physical cooling measures such as tepid sponging may provide comfort but should not be used as the primary method of fever reduction.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 201: Fever",
+    "section": "Management"
+  },
+  {
+    "title": "Serious Bacterial Infection Risk in Febrile Infants",
+    "content": "Febrile infants, particularly those under 3 months of age, are at increased risk for serious bacterial infections (SBI) including bacteremia, urinary tract infections, and bacterial meningitis. The risk is highest in neonates (0-28 days) and decreases with age. Well-appearing febrile infants 29-90 days old with low-risk criteria (previously healthy, non-toxic appearance, normal laboratory values) have a low risk of SBI. However, all febrile infants under 28 days require comprehensive evaluation including blood culture, urine culture, lumbar puncture, and empirical antibiotic therapy pending culture results. The Rochester, Philadelphia, and Boston criteria are validated tools for risk stratification in febrile infants 28-90 days old. Procalcitonin and C-reactive protein may be helpful adjuncts but should not replace clinical judgment.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 201: Fever",
+    "section": "Serious Bacterial Infections"
+  },
+  {
+    "title": "Acute Otitis Media - Diagnosis and Management",
+    "content": "Acute otitis media (AOM) is one of the most common bacterial infections in children, with peak incidence between 6-24 months of age. Diagnosis requires the presence of middle ear effusion plus signs and symptoms of acute inflammation (ear pain, fever, irritability). Otoscopic examination showing a bulging, erythematous, or opaque tympanic membrane with decreased mobility is diagnostic. The most common bacterial pathogens are Streptococcus pneumoniae, Haemophilus influenzae, and Moraxella catarrhalis. First-line antibiotic therapy is amoxicillin 80-90 mg/kg/day divided twice daily for 10 days in children under 2 years or 5-7 days in children 2-5 years with uncomplicated AOM. Amoxicillin-clavulanate should be used if the child has received amoxicillin within 30 days, has concurrent purulent conjunctivitis, or has failed initial amoxicillin therapy. Pain management with acetaminophen or ibuprofen is important for patient comfort.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 640: Otitis Media",
+    "section": "Acute Otitis Media"
+  },
+  {
+    "title": "Asthma in Children - Pathophysiology and Triggers",
+    "content": "Asthma is a chronic inflammatory disorder of the airways characterized by variable and recurring symptoms, airflow obstruction, bronchial hyperresponsiveness, and underlying inflammation. In children, asthma often begins in early childhood and may be associated with allergic sensitization. Common triggers include respiratory viral infections, allergens (dust mites, pet dander, pollen, mold), irritants (tobacco smoke, strong odors, air pollution), exercise, cold air, and emotional stress. The inflammatory process involves multiple cell types including eosinophils, mast cells, T-lymphocytes, and neutrophils. This inflammation leads to bronchial hyperresponsiveness, mucus hypersecretion, and airway remodeling over time. Understanding and avoiding triggers is a crucial component of asthma management, along with appropriate pharmacotherapy and patient education.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 169: Asthma",
+    "section": "Pathophysiology and Triggers"
+  },
+  {
+    "title": "Asthma Treatment - Controller and Rescue Medications",
+    "content": "Asthma treatment follows a stepwise approach based on symptom frequency and severity. Controller medications are used daily for long-term control and include inhaled corticosteroids (ICS), which are the preferred first-line therapy for persistent asthma. Low-dose ICS (fluticasone 44-88 mcg twice daily or equivalent) is appropriate for mild persistent asthma. Moderate doses may be needed for moderate persistent asthma. Long-acting beta-2 agonists (LABA) should only be used in combination with ICS, never as monotherapy. Rescue medications include short-acting beta-2 agonists (SABA) such as albuterol 2-4 puffs every 4-6 hours as needed for acute symptoms. Proper inhaler technique and spacer use are essential for medication effectiveness. Regular monitoring and adjustment of therapy based on asthma control is necessary to maintain optimal outcomes while minimizing medication side effects.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 169: Asthma",
+    "section": "Pharmacotherapy"
+  },
+  {
+    "title": "Growth and Development - Normal Growth Patterns",
+    "content": "Normal growth in children follows predictable patterns that can be assessed using standardized growth charts. Birth weight typically doubles by 4-6 months and triples by 12 months. Length increases by approximately 25 cm in the first year, 12 cm in the second year, and 6-8 cm per year thereafter until puberty. Head circumference increases rapidly in the first year, reflecting brain growth. Growth velocity is highest in infancy and during puberty. Genetic factors account for most variation in final adult height, but nutrition, health status, and environmental factors also play important roles. Growth charts should be used to plot measurements over time, with attention to growth velocity and crossing of percentile lines. A child consistently following their own growth curve, even if below average, is usually normal. Concerning patterns include crossing two or more percentile lines downward, failure to gain weight, or deceleration in linear growth.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 13: Assessment of Growth",
+    "section": "Normal Growth Patterns"
+  },
+  {
+    "title": "Failure to Thrive - Evaluation and Management",
+    "content": "Failure to thrive (FTT) is defined as inadequate weight gain or growth in children. It is typically diagnosed when weight falls below the 3rd percentile for age or crosses two or more major percentile lines on growth charts. FTT can be classified as organic (due to underlying medical conditions) or non-organic (due to psychosocial or environmental factors), though mixed causes are common. The evaluation should include a detailed history focusing on feeding practices, family dynamics, and social circumstances, along with a thorough physical examination. Laboratory testing should be guided by clinical findings rather than performed routinely. Management involves addressing underlying causes, optimizing nutrition, and providing family support. Caloric requirements may be increased to 120-150% of normal for catch-up growth. Close monitoring with frequent weight checks is essential. Early intervention and multidisciplinary care involving pediatricians, nutritionists, and social workers often improve outcomes.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 13: Assessment of Growth",
+    "section": "Failure to Thrive"
+  },
+  {
+    "title": "Immunization Schedule and Vaccine Safety",
+    "content": "The recommended immunization schedule for children is designed to provide protection against vaccine-preventable diseases at the earliest appropriate age. The schedule is regularly updated by the Advisory Committee on Immunization Practices (ACIP) and endorsed by the American Academy of Pediatrics. Key vaccines include hepatitis B (birth, 1-2 months, 6-18 months), DTaP (2, 4, 6, 15-18 months, 4-6 years), Hib (2, 4, 6, 12-15 months), pneumococcal conjugate (2, 4, 6, 12-15 months), inactivated poliovirus (2, 4, 6-18 months, 4-6 years), MMR (12-15 months, 4-6 years), and varicella (12-15 months, 4-6 years). Vaccines are extensively tested for safety and efficacy before approval. Serious adverse events are rare, and the benefits of vaccination far outweigh the risks. Common mild side effects include local pain, redness, and low-grade fever. Contraindications include severe immunodeficiency and severe allergic reactions to vaccine components.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 293: Immunization Practices",
+    "section": "Schedule and Safety"
+  },
+  {
+    "title": "Developmental Milestones - Motor and Language Development",
+    "content": "Developmental milestones provide a framework for assessing normal child development. Motor development progresses in a cephalocaudal and proximodistal pattern. Gross motor milestones include head control (2-4 months), sitting without support (6-8 months), crawling (7-10 months), walking independently (9-15 months), running (18-24 months), and jumping (24-30 months). Fine motor development includes reaching for objects (4-6 months), transferring objects hand to hand (6-8 months), pincer grasp (9-12 months), and scribbling (12-18 months). Language development includes social smiling (2-3 months), cooing (2-4 months), babbling (6-9 months), first words (10-14 months), two-word phrases (18-24 months), and 50+ word vocabulary by 24 months. Significant delays in achieving milestones warrant evaluation for developmental disorders, hearing impairment, or other underlying conditions. Early intervention services can significantly improve outcomes for children with developmental delays.",
+    "source": "Nelson Textbook of Pediatrics",
+    "chapter": "Chapter 14: Developmental Assessment",
+    "section": "Motor and Language Milestones"
+  }
+]
+
